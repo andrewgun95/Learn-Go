@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+// Specify proto package
+package blog;
+
+// Specify generated package in Go "path_dir;package"
+option go_package="./blogpb;blog";
+
+message Blog {
+    string id = 1;
+    string authorId = 2;
+    string title = 3;
+    string content = 4;
+}
+
+message CreateBlogRequest {
+    Blog blog = 1;
+}
+
+message CreateBlogResponse {
+    Blog result = 1;
+}
+
+message ReadBlogRequest {
+    string blogId = 1;
+}
+
+message ReadBlogResponse {
+    Blog result = 1;
+}
+
+message UpdateBlogRequest {
+    Blog blog = 1;
+}
+
+message UpdateBlogResponse {
+    Blog result = 1;
+}
+
+message DeleteBlogRequest {
+    string blogId = 1;
+}
+
+message DeleteBlogResponse {
+    string result = 1;
+}
+
+message ListBlogRequest {
+    string sortBy = 1;
+    string sort = 2;
+    string title = 3;
+    string authorId = 4;
+}
+
+message ListBlogResponse {
+    Blog blog = 1;
+}
+
+service BlogService {
+    rpc CreateBlog(CreateBlogRequest) returns (CreateBlogResponse) {};
+    // Read a Blog
+    // 1. Accept a blog id
+    // 2. Return a blog result
+    // Exception;
+    // 2. Return an error - Not Found, if not found any blog with the given id
+    rpc ReadBlog(ReadBlogRequest) returns (ReadBlogResponse) {};
+
+    rpc UpdateBlog(UpdateBlogRequest) returns (UpdateBlogResponse) {};
+
+    rpc DeleteBlog(DeleteBlogRequest) returns (DeleteBlogResponse) {};
+
+    // List of Blogs
+    // 1. Accept a blog filter, includes :
+    //    SortBy    is sort field
+    //    Sort      is sort method (asc | desc)
+    //    Title     is title keyword
+    //    AuthodId  is author keyword
+    rpc ListBlog(ListBlogRequest) returns (stream ListBlogResponse) {};
+}

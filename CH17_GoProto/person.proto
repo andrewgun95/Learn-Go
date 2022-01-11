@@ -1,0 +1,26 @@
+// Specify proto syntax
+syntax="proto3";
+
+// Go import path
+// Syntax : go_package = "{path};{package_name}"
+option go_package = "./intro;main";
+
+// No correlation between proto package with the Go import path
+package person;
+
+message SocialFollowers {
+    int32 youtube = 1;
+    int32 twitter = 2;
+}
+
+// Define data structure
+// Syntax :
+// message type_name {
+//    field_type field_name = field_tag
+// }
+message Person {
+    string name = 1;
+    int32 age = 2;
+    SocialFollowers socialFollowers = 3;
+}
+

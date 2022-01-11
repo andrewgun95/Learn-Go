@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Save Wiki</title>
+    <style>
+        .container {
+            width: 60%;
+            height: 800px;
+            /* to centered the page */
+            margin: 0 auto;
+
+            box-shadow: 5px lightgray;
+            border: double 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p>Successfully saved <strong>{{.Title}}</strong></p><a href="/view/{{.Title}}">View</p>
+    </div>
+</body>
+</html>

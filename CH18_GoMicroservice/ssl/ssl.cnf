@@ -1,0 +1,11 @@
+[ req ]
+default_bits = 4096
+distinguished_name = dn
+req_extensions = req_ext
+prompt = no
+
+[ dn ]
+CN = localhost
+
+[ req_ext ]
+subjectAltName = IP:127.0.0.1

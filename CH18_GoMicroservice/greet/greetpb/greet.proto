@@ -1,0 +1,83 @@
+syntax = "proto3";
+
+package greet;
+
+// Path for code generation
+option go_package="./greetpb;greet";
+
+message Greeting {
+    string firstName = 1;
+    string lastName = 2;
+}
+
+// Unary
+
+message GreetRequest {
+    Greeting greeting = 1;
+}
+
+message GreetResponse {
+    string result = 1;
+}
+
+// Server Streaming
+
+message GreetManyTimesRequest {
+    Greeting greeting = 1;
+    int32 times = 2;
+}
+
+message GreetManyTimesResponse {
+    string result = 1;
+}
+
+// Client Streaming
+
+message LongGreetRequest {
+    Greeting greeting = 1;
+}
+
+message LongGreetResponse {
+    string result = 1;
+}
+
+// BiDi Streaming
+
+message GreetEveryoneRequest {
+    Greeting greeting = 1;
+}
+
+message GreetEveryoneResponse {
+    string result = 1;
+}
+
+message GreetDeadlineRequest {
+    Greeting greeting = 1;
+}
+
+message GreetDeadlineResponse {
+    string result = 1;
+}
+
+service GreetService {
+    // Unary API; 
+    // Greet accept a GreetRequest and give a GreetResponse
+    rpc Greet(GreetRequest) returns (GreetResponse) {};
+    // Server Streaming API;
+    // GreetManyTimes accept a GreetManyTimesRequest and gives multiple GreetManyTimesResponse
+    rpc GreetManyTimes(GreetManyTimesRequest) returns (stream GreetManyTimesResponse) {};
+    // Client Streaming API;
+    // LongGreet accept a multiple LongGreetRequest and give a single LongGreetResponse
+    rpc LongGreet(stream LongGreetRequest) returns (LongGreetResponse) {};
+    // BiDi Streaming API;
+    // GreetEveryone accept a multiple GreetEveryoneRequest and gives multiple GreetEveryoneResponse
+    rpc GreetEveryone(stream GreetEveryoneRequest) returns (stream GreetEveryoneResponse) {};
+    // Unary API with Deadline;
+    // GreetWithDeadline accept a GreetWithDeadlineRequest and give a GreetWithDeadlineResponse
+    rpc GreetDeadline(GreetDeadlineRequest) returns (GreetDeadlineResponse) {};
+}
+
+// Convention
+// 
+// rpc X(XRequest) returns (XResponse) {}
+// where X is endpoint
